@@ -8,9 +8,10 @@ import { history } from '../redux/configureStore';
 import PostList from '../pages/PostList';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import Permit from './Permit';
 
 import Header from '../components/common/Header';
-import { Grid } from '../elements/index';
+import { Grid, Button } from '../elements/index';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
@@ -39,6 +40,9 @@ function App() {
           <Route path="/SignUp" exact component={SignUp} />
         </ConnectedRouter>
       </Grid>
+      <Permit>
+        <Button is_float text="+"></Button>
+      </Permit>
     </React.Fragment>
   );
 }

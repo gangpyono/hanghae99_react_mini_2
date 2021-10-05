@@ -26,7 +26,7 @@ const Image = (props) => {
 
 Image.defaultProps = {
   shape: 'circle',
-  src: 'https://lh3.googleusercontent.com/proxy/zJ95GWLwy4-BE-qYqabq8mGIZ0A7m0c397H5wzx3X6G9xH1Qk7Ur9Wmu4FfpvDW_8T05ZHKfpxBeL8T0zbww-oumP2jyPFpvhZ3uEguexpkqs7j0oMM',
+  src: 'https://lh3.googleusercontent.com/proxy/rmnzK3GlBcJt59GaP5zA24g7HK6pRXuc9yMQpfeGM9kH9O7CDf_xjFvmkFlOELG9UI8wJCg4v_QMto38ZtJ82tLsNezxACea-f1OkOCMbqdnRi5XWYM',
   size: 36,
 };
 

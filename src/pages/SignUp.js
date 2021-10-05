@@ -1,17 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
 
 import { Grid, Text, Input, Button } from '../elements/index';
-
+import { emailCheck } from '../shared/common';
 const SignUp = (props) => {
-  // const id_ref = React.useRef(null);
-  // const nick_ref = React.useRef(null);
-  // const pw_ref = React.useRef(null);
-  // const pwpw_ref = React.useRef(null);
-
   const dispatch = useDispatch();
 
   const [id, setId] = React.useState('');
@@ -21,10 +15,17 @@ const SignUp = (props) => {
 
   const signup = () => {
     if (id === '' || pwd === '' || user_name === '') {
+      window.alert('아이디,패스워드,닉네임 모두 입력해주세요.');
+      return;
+    }
+
+    if (!emailCheck(id)) {
+      window.alert('이메일 형식이 맞지않습니다!');
       return;
     }
 
     if (pwd !== pwd_check) {
+      window.alert('비밀번호가 일치하지 않습니다.');
       return;
     }
 
@@ -40,7 +41,6 @@ const SignUp = (props) => {
 
         <Grid padding="16px 0px">
           <Input
-            // ref={id_ref}
             label="아이디"
             placeholder="아이디를 입력하세요"
             _onChange={(e) => {
@@ -51,7 +51,6 @@ const SignUp = (props) => {
 
         <Grid padding="16px 0px">
           <Input
-            // ref={nick_ref}
             label="닉네임"
             placeholder="닉네임을 입력하세요"
             _onChange={(e) => {
@@ -62,7 +61,6 @@ const SignUp = (props) => {
 
         <Grid padding="16px 0px">
           <Input
-            // ref={pw_ref}
             label="비밀번호"
             placeholder="비밀번호를 입력하세요"
             _onChange={(e) => {
