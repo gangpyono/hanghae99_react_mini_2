@@ -11,6 +11,10 @@
 # production
 /build
 
+#Cookie
+Cookie.js
+
+
 # misc
 .DS_Store
 .env.local
