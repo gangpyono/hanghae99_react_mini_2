@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const Button = (props) => {
-  const { _onClick, text, is_float, like } = props;
+  const { _onClick, text, is_float, like, header, margin, width } = props;
 
   if (is_float) {
     return <FloatButton onClick={_onClick}>{text}</FloatButton>;
@@ -16,11 +16,20 @@ const Button = (props) => {
     );
   }
 
-  if (text === '로그인하기' || text === '회원가입하기') {
-    return <Btn onClick={_onClick}>{text}</Btn>;
-  } else {
+  if (header) {
     return <HeaderBtn onClick={_onClick}>{text}</HeaderBtn>;
   }
+
+  const styles = {
+    margin: margin,
+    width: width,
+  };
+
+  return (
+    <Btn {...styles} onClick={_onClick}>
+      {text}
+    </Btn>
+  );
 };
 
 Button.defaultProps = {
@@ -31,17 +40,21 @@ Button.defaultProps = {
   text: 'text값을 전달받지 못했습니다.',
   is_float: false,
   like: false,
+  header: false,
+  margin: false,
+  width: '100%',
+  heigth: '80px',
 };
 
 const Btn = styled.button`
   font-size: 20px;
-  width: 100%;
-  height: 80px;
+  width: ${(props) => props.width};
   padding: 12px 0px;
   box-sizing: border-box;
   color: #ffffff;
   background-color: #000000;
   cursor: pointer;
+  ${(props) => (props.margin ? `margin : ${props.margin}` : '')};
 `;
 
 const HeaderBtn = styled.button`
@@ -59,7 +72,6 @@ const FloatButton = styled.button`
   height: 50px;
   background-color: #212121;
   color: #ffffff;
-
   box-sizing: border-box;
   font-size: 36px;
   font-weight: 800;

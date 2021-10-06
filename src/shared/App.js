@@ -8,6 +8,8 @@ import { history } from '../redux/configureStore';
 import PostList from '../pages/PostList';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import PostWrite from '../pages/PostWrite';
+import PostDetail from '../pages/PostDetail';
 import Permit from './Permit';
 
 import Header from '../components/common/Header';
@@ -38,10 +40,18 @@ function App() {
           <Route path="/" exact component={PostList} />
           <Route path="/Login" exact component={Login} />
           <Route path="/SignUp" exact component={SignUp} />
+          <Route path="/PostWrite" exact component={PostWrite} />
+          <Route path="/PostDetail" exact component={PostDetail} />
         </ConnectedRouter>
       </Grid>
       <Permit>
-        <Button is_float text="+"></Button>
+        <Button
+          is_float
+          _onClick={() => {
+            history.push('/PostWrite');
+          }}
+          text="+"
+        ></Button>
       </Permit>
     </React.Fragment>
   );

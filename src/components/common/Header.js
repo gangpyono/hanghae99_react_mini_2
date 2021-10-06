@@ -11,16 +11,6 @@ const Header = (props) => {
   // 세션으로 체크할시, 딜레이가생겨 화면 렌더링이 안됨.
   const is_login = useSelector((state) => state.user.is_login);
 
-  // React.useEffect(() => {
-  //   let cookie = getCookie('user_id');
-  //   console.log(cookie);
-  //   if (cookie) {
-  //     setIsLogin(true);
-  //   } else {
-  //     setIsLogin(false);
-  //   }
-  // }, []);
-
   if (is_login) {
     return (
       <Grid padding="4px 16px" is_flex>
@@ -29,9 +19,10 @@ const Header = (props) => {
         </Grid>
 
         <Grid is_flex>
-          <Button text="내정보" />
-          <Button text="알림" />
+          <Button text="내정보" header />
+          <Button text="알림" header />
           <Button
+            header
             text="로그아웃"
             _onClick={() => {
               // 화살표함수로 넣어야 클릭시 실행되는 구조를 만들 수있다.
@@ -50,8 +41,8 @@ const Header = (props) => {
       </Grid>
 
       <Grid is_flex>
-        <Button text="회원가입" />
-        <Button text="로그인" />
+        <Button header text="회원가입" _onClick={() => {}} />
+        <Button header text="로그인" />
       </Grid>
     </Grid>
   );
