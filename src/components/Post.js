@@ -1,9 +1,14 @@
 import React from 'react';
-
-import { Grid, Image, Text, Button } from '../elements/index';
+import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configureStore';
 
+import { Grid, Image, Text, Button } from '../elements/index';
+import { actionCreators as postActions } from '../redux/modules/post';
+
 const Post = (props) => {
+  const dispatch = useDispatch();
+  const user_id = useSelector((state) => state.user.user.uid);
+
   return (
     <React.Fragment>
       <Grid>
@@ -12,9 +17,10 @@ const Post = (props) => {
 
           <Image shape="circle" src={props.user_profile} />
           <Text bold>{props.user_info.user_name}</Text>
+
           <Grid is_flex width="auto">
             <Text>{props.insert_dt}</Text>
-            {props.is_me && (
+            {props.is_me && ( // 내가작성한 게시물에만 보여주기
               <Button
                 text="수정"
                 width="100px"
@@ -31,12 +37,26 @@ const Post = (props) => {
         </Grid>
 
         <Grid>
-          <Image shape="rectangle" src={props.image_url} />
+          <Image
+            shape="rectangle"
+            src={props.image_url}
+            _onClick={() => {
+              history.push(`/PostDetail/${props.id}`);
+            }}
+          />
         </Grid>
 
         <Grid is_flex padding="16px">
-          <Text bold>댓글{props.comment_cnt}개</Text>
-          <Button like></Button>
+          <Text bold>{props.comment_cnt}개</Text>
+          <Grid is_flex width="auto">
+            <Button
+              like
+              _onClick={() => {
+                dispatch(postActions.like(props.id, user_id));
+              }}
+            ></Button>
+            <Text bold>좋아요 : {props.like_cnt}개</Text>
+          </Grid>
         </Grid>
       </Grid>
     </React.Fragment>

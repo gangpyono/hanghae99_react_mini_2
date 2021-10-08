@@ -64,7 +64,7 @@ const PostWrite = (props) => {
       <>
         <Grid padding="16px">
           <Text bold size="32px">
-            게시글 작성
+            게시글 수정
           </Text>
           <Upload />
         </Grid>
