@@ -64,7 +64,6 @@ const signupFB = (id, pwd, user_name) => {
     auth
       .createUserWithEmailAndPassword(id, pwd)
       .then((user) => {
-        console.log(user);
         // 회원가입완료시 user_name넣어주기위해 바로 업데이트시킴
         auth.currentUser
           .updateProfile({

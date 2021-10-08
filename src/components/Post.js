@@ -1,16 +1,29 @@
 import React from 'react';
 
 import { Grid, Image, Text, Button } from '../elements/index';
+import { history } from '../redux/configureStore';
 
 const Post = (props) => {
   return (
     <React.Fragment>
       <Grid>
-        <Grid is_flex>
+        <Grid is_flex width="auto">
           {/* is_flex 값은 무엇인가?  값을 넣지않으면 true로 들어감. (jsx 문법)*/}
-          <Image shape="circle" />
+
+          <Image shape="circle" src={props.user_profile} />
           <Text bold>{props.user_info.user_name}</Text>
-          <Text>{props.insert_dt}</Text>
+          <Grid is_flex width="auto">
+            <Text>{props.insert_dt}</Text>
+            {props.is_me && (
+              <Button
+                text="수정"
+                width="100px"
+                _onClick={() => {
+                  history.push(`/PostWrite/${props.id}`);
+                }}
+              ></Button>
+            )}
+          </Grid>
         </Grid>
 
         <Grid padding="16px">
@@ -18,7 +31,7 @@ const Post = (props) => {
         </Grid>
 
         <Grid>
-          <Image shape="rectangle" src={props.src} />
+          <Image shape="rectangle" src={props.image_url} />
         </Grid>
 
         <Grid is_flex padding="16px">
@@ -42,13 +55,14 @@ Post.defaultProps = {
   user_info: {
     user_name: 'gangpyo',
     user_profile:
-      'https://lh3.googleusercontent.com/proxy/rmnzK3GlBcJt59GaP5zA24g7HK6pRXuc9yMQpfeGM9kH9O7CDf_xjFvmkFlOELG9UI8wJCg4v_QMto38ZtJ82tLsNezxACea-f1OkOCMbqdnRi5XWYM',
+      'https://t1.daumcdn.net/liveboard/holapet/0e5f90af436e4c218343073164a5f657.JPG',
   },
   image_url:
     'https://lh3.googleusercontent.com/proxy/rmnzK3GlBcJt59GaP5zA24g7HK6pRXuc9yMQpfeGM9kH9O7CDf_xjFvmkFlOELG9UI8wJCg4v_QMto38ZtJ82tLsNezxACea-f1OkOCMbqdnRi5XWYM', // 게시글이미지
   contents: '강아지네요!',
   comment_cnt: 10,
   insert_dt: '2021-09-30 15:28',
+  is_me: false,
 };
 
 export default Post;

@@ -41,6 +41,7 @@ function App() {
           <Route path="/Login" exact component={Login} />
           <Route path="/SignUp" exact component={SignUp} />
           <Route path="/PostWrite" exact component={PostWrite} />
+          <Route path="/PostWrite/:id" exact component={PostWrite} />
           <Route path="/PostDetail" exact component={PostDetail} />
         </ConnectedRouter>
       </Grid>

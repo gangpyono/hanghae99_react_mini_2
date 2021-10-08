@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { Text, Grid } from './index';
 
 const Input = (props) => {
-  const { label, placeholder, _onChange, type, multiline } = props;
+  const { label, placeholder, _onChange, type, multiline, defaultValue } =
+    props;
 
   if (multiline) {
     return (
@@ -15,6 +16,7 @@ const Input = (props) => {
           type={type}
           placeholder={placeholder}
           onChange={_onChange}
+          defaultValue={defaultValue ? defaultValue : null}
         ></TextArea>
       </Grid>
     );
@@ -39,6 +41,7 @@ Input.defaultProps = {
   placeholder: 'placeholder을 설정해주세요',
   type: 'text',
   _onChange: () => {}, // Input을 사용중인 부모컴포넌트가 현재 쓰여진 텍스트를 알고싶기떄문에
+  value: false,
 };
 
 const InputBox = styled.input`
