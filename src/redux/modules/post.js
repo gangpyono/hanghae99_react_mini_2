@@ -20,10 +20,9 @@ const setPost = createAction(SET_POST, (post_list, paging) => ({
 const addPost = createAction(ADD_POST, (post) => ({ post }));
 const updatePost = createAction(UPDATE_POST, (post) => ({ post }));
 const loading = createAction(LOADING, (is_loading) => ({ is_loading }));
-const like = createAction(LIKE, (post_id, user_id) => ({
+const like = createAction(LIKE, (newLikes, post_id) => ({
+  newLikes,
   post_id,
-  user_id,
-  is_like,
 }));
 
 const initialState = {
@@ -37,8 +36,7 @@ const initialPost = {
     'https://lh3.googleusercontent.com/proxy/rmnzK3GlBcJt59GaP5zA24g7HK6pRXuc9yMQpfeGM9kH9O7CDf_xjFvmkFlOELG9UI8wJCg4v_QMto38ZtJ82tLsNezxACea-f1OkOCMbqdnRi5XWYM',
   contents: '강아지네요',
   comment_cnt: 10,
-  like_cnt: 0,
-  like: false,
+  likes: [],
   insert_dt: '2021-01-01 21:00:00',
 };
 
@@ -223,19 +221,22 @@ const updatePostFB = (post_id, contents) => {
   };
 };
 
-const likeFB = (post_id, user_id, is_like = false) => {
+const likeFB = (post_id, user_id) => {
   return function (dispatch, getState, { history }) {
-    const likeDB = firestore.collection('like');
+    const idx = getState().post.list.findIndex((post) => post.id === post_id);
+    const post = getState().post.list[idx];
+
     const postDB = firestore.collection('post');
 
-    if (!is_like) {
-      // 좋아요 한 상태라면 취소하기.
-
-      likeDB
-        .where('post_id', '==', post_id)
-        .where('user_id', '==', user_id)
-        .get()
-        .then((docs) => {});
+    if (post.likes.includes(user_id)) {
+      const newLikes = post.likes.filter((u) => u !== user_id);
+      postDB.doc(post_id).update({ likes: newLikes });
+      dispatch(like(newLikes, post_id));
+    } else {
+      const newLikes = [...post.likes];
+      newLikes.push(user_id);
+      postDB.doc(post_id).update({ likes: [...newLikes] });
+      dispatch(like(newLikes, post_id));
     }
   };
 };
@@ -267,14 +268,14 @@ export default handleActions(
     [LIKE]: (state, action) =>
       produce(state, (draft) => {
         const idx = draft.list.findIndex(
-          (post) => post.id === action.payload.post_id
+          (p) => p.id === action.payload.post_id
         );
-
-        if (action.payload.like) {
-          draft.list[idx].like_cnt++;
-        } else {
-          draft.list[idx].like_cnt--;
-        }
+        // draft.list[idx].likes = action.payload.newLikes;
+        console.log(idx);
+        draft.list[idx] = {
+          ...draft.list[idx],
+          likes: action.payload.newLikes,
+        };
       }),
   },
   initialState
@@ -287,7 +288,7 @@ const actionCreators = {
   getPostFB,
   addPostFB,
   updatePostFB,
-  like,
+  likeFB,
 };
 
 export { actionCreators };

@@ -6,6 +6,7 @@ import { Grid, Input, Image, Text, Button } from '../elements/index';
 import Upload from '../shared/Upload';
 import post, { actionCreators as postActions } from '../redux/modules/post';
 import { actionCreators as imageActions } from '../redux/modules/image';
+
 const PostWrite = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);

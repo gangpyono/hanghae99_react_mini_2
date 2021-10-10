@@ -114,6 +114,7 @@ const loginCheckFB = () => {
         );
       } else {
         dispatch(logOut());
+        history.replace('/Login');
       }
     });
   };
@@ -123,7 +124,6 @@ const logoutFB = () => {
   return function (dispatch, getState, { history }) {
     auth.signOut().then(() => {
       dispatch(logOut());
-      history.replace('/Login'); // 현재페이지에서 해당경로로 대체( 뒤로가기기능 사라짐 )
     });
   };
 };

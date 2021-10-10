@@ -2,19 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 const Button = (props) => {
-  const { _onClick, text, is_float, like, header, margin, width } = props;
+  const { _onClick, text, is_float, header, margin, width } = props;
 
   if (is_float) {
     return <FloatButton onClick={_onClick}>{text}</FloatButton>;
   }
 
-  if (like) {
-    return (
-      <LikeButton onClick={_onClick}>
-        <FavoriteBorderIcon></FavoriteBorderIcon>
-      </LikeButton>
-    );
-  }
+  // if (like) {
+  //   return (
+  //     <LikeButton onClick={_onClick}>
+  //       <FavoriteBorderIcon></FavoriteBorderIcon>
+  //     </LikeButton>
+  //   );
+  // }
 
   if (header) {
     return <HeaderBtn onClick={_onClick}>{text}</HeaderBtn>;
@@ -81,12 +81,6 @@ const FloatButton = styled.button`
   border-radius: 50%;
   text-align: center;
   padding-top: 4px;
-  cursor: pointer;
-`;
-
-const LikeButton = styled.button`
-  background-color: transparent;
-  border: none;
   cursor: pointer;
 `;
 

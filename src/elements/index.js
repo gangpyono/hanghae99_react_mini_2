@@ -4,5 +4,6 @@ import Text from './Text';
 import Input from './Input';
 import Button from './Button';
 import Spinner from './Spinner';
+import LikeButton from './LikeButton';
 
-export { Grid, Image, Text, Button, Input, Spinner };
+export { Grid, Image, Text, Button, Input, Spinner, LikeButton };

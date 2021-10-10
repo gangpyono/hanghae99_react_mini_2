@@ -2,12 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../redux/configureStore';
 
-import { Grid, Image, Text, Button } from '../elements/index';
+import { Grid, Image, Text, Button, LikeButton } from '../elements/index';
 import { actionCreators as postActions } from '../redux/modules/post';
 
-const Post = (props) => {
+const Post = React.memo((props) => {
+  const user_info = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
-  const user_id = useSelector((state) => state.user.user.uid);
+
+  console.log('post');
 
   return (
     <React.Fragment>
@@ -49,13 +51,13 @@ const Post = (props) => {
         <Grid is_flex padding="16px">
           <Text bold>{props.comment_cnt}개</Text>
           <Grid is_flex width="auto">
-            <Button
-              like
+            <LikeButton
+              is_like={props.like}
               _onClick={() => {
-                dispatch(postActions.like(props.id, user_id));
+                dispatch(postActions.likeFB(props.id, user_info.uid));
               }}
-            ></Button>
-            <Text bold>좋아요 : {props.like_cnt}개</Text>
+            ></LikeButton>
+            <Text bold>좋아요 : {props.likes.length}개</Text>
           </Grid>
         </Grid>
       </Grid>
@@ -68,7 +70,7 @@ const Post = (props) => {
     /* <div>image</div>
         <div>comment cnt </div> */
   );
-};
+});
 
 // props가 전달되지않았을시를 대비 (잘못 가져왔을시의 대비는 못한다.)
 Post.defaultProps = {
