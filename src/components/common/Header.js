@@ -19,8 +19,6 @@ const Header = (props) => {
         </Grid>
 
         <Grid is_flex>
-          <Button text="내정보" header />
-          <Button text="알림" header />
           <Button
             header
             text="로그아웃"

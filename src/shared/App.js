@@ -13,7 +13,7 @@ import PostDetail from '../pages/PostDetail';
 import Permit from './Permit';
 
 import Header from '../components/common/Header';
-import { Grid, Button } from '../elements/index';
+import { Grid } from '../elements/index';
 
 import { useDispatch } from 'react-redux';
 import { actionCreators as userActions } from '../redux/modules/user';
@@ -45,7 +45,7 @@ function App() {
           <Route path="/PostDetail/:id" exact component={PostDetail} />
         </ConnectedRouter>
       </Grid>
-      <Permit>
+      {/* <Permit>
         <Button
           is_float
           _onClick={() => {
@@ -53,7 +53,7 @@ function App() {
           }}
           text="+"
         ></Button>
-      </Permit>
+      </Permit> */}
     </React.Fragment>
   );
 }

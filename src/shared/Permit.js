@@ -16,3 +16,5 @@ const Permit = (props) => {
 };
 
 export default Permit;
+
+// 유저가 로그인을 했나 안했나.

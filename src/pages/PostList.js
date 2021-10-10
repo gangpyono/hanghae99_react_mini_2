@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import Post from '../components/Post';
 import { actionCreators as postActions } from '../redux/modules/post';
 import InfinityScroll from '../shared/InfinityScroll';
-import { Grid } from '../elements';
+import { Grid, Button } from '../elements';
+
 import user from '../redux/modules/user';
 
 const PostList = (props) => {
@@ -60,6 +61,13 @@ const PostList = (props) => {
           }
         })}
       </InfinityScroll>
+      <Button
+        is_float
+        _onClick={() => {
+          history.push('/PostWrite');
+        }}
+        text="+"
+      ></Button>
     </React.Fragment>
   );
 };
